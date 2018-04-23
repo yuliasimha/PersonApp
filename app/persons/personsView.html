@@ -1,0 +1,65 @@
+<div class="container">
+    <div>
+        <input type="text" class="form-control mt-1" name="" id="search" ng-model="filterProp" reqiered aria-describedby="helpId"
+            placeholder="Search">
+    </div>
+    <div class="mb-3 mt-3">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" ng-click="clearModel()" data-target="#modelId">
+            New Person
+        </button>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th ng-click="sortProp = 'fName'">First Name</th>
+                <th ng-click="sortProp ='lName'">Last Name</th>
+                <th ng-click="sortProp = 'age'">Age</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="person in persons | filter:filterPersons | orderBy:sortProp">
+                <td>{{ person.fName }}</td>
+                <td>{{ person.lName }}</td>
+                <td>{{ person.age }}</td>
+                <td>
+                    <button class="rounded-circle" ng-click="editPerson(person)">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button ng-click="deletePerson(person)" class="rounded-circle">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modelTitleId">Add/Edit person</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="text" class="form-control mt-1" name="" id="firstName" ng-model="selectedPerson.fName" reqiered aria-describedby="helpId"
+                            placeholder="First Name">
+                        <input type="text" class="form-control mt-1" name="" id="lastName" ng-model="selectedPerson.lName" reqiered aria-describedby="helpId"
+                            placeholder="Last Name">
+                        <input type="number" class="form-control mt-1" name="" id="age" ng-model="selectedPerson.age" reqiered aria-describedby="helpId"
+                            placeholder="Age">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="addEditPerson()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
